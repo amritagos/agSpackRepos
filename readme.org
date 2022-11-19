@@ -1,0 +1,18 @@
+* About
+This is a spack repository for working with customized remotes. The basic use case is with LUMI.
+
+** Usage
+This assumes LUMI. Other instructions will differ.
+
+```bash
+cd $LUMI_PROJ # project/project_ID
+gh repo clone amritagos/agSpackRepos
+gh repo clone spack/spack mySpack
+gh repo clone lumi-supercomputer/lumi-spack-settings
+cp lumi-spack-settings/22.08/0.18.1-user/*.yaml $HOME/.spack/linux/
+# Now add
+. mySpack/share/spack/setup-env.sh
+spack repo add agSpackRepos
+```
+
+The key idea is to copy and modify ~package.py~ files for use.
