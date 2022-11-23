@@ -4,7 +4,7 @@ This is a spack repository for working with customized remotes. The basic use ca
 ** Usage
 This assumes LUMI. Other instructions will differ.
 
-```bash
+#+begin_src bash
 cd $LUMI_PROJ # project/project_ID
 gh repo clone amritagos/agSpackRepos
 gh repo clone spack/spack mySpack
@@ -13,6 +13,43 @@ cp lumi-spack-settings/22.08/0.18.1-user/*.yaml $HOME/.spack/linux/
 # Now add
 . mySpack/share/spack/setup-env.sh
 spack repo add agSpackRepos
-```
+#+end_src
 
-The key idea is to copy and modify ~package.py~ files for use.
+The key idea is to copy and modify ~package.py~ files for use. The namespace is ~ag.spack~ and finding things is simply by inspecting the ~packages~ folder.
+
+#+begin_src bash
+tree packages
+spack find -N # Show namespaces
+#+end_src
+
+** Supported Applications
+
+Currently we have:
+
+#+begin_src bash
+ag.spack.lammps @newR4LJ
+#+end_src
+
+Followed by the regular options. So something like:
+
+#+begin_src bash
+spack install ag.spack.lammps @newR4LJ %cce@14.0.2 +asphere +body +class2 +colloid +compress +coreshell  +dipole +granular +kspace +manybody +mc +misc +molecule +mpiio +peri +python +qeq +replica +rigid +shock +snap +spin +srd +user-reaxc +user-misc ~kim
+#+end_src
+
+~kokkos~ will conflict without the suggested version.
+~kim~ fails with ~cce~ somehow
+
+Now that we have this we can use it:
+
+#+begin_src bash
+spack load lammps@newR4LJ%cce@14.0.2
+#+end_src
+
+To use this in a scripted manner the steps are then:
+
+#+begin_src bash
+cd $LUMI_PROJ
+source mySpack/share/spack/setup-env.sh
+spack load lammps@newR4LJ%cce@14.0.2
+# The lmp binary is now present
+#+end_src
