@@ -19,10 +19,11 @@ class Lammps(CMakePackage, CudaPackage):
 
     homepage = "https://lammps.sandia.gov/"
     url = "https://github.com/lammps/lammps/archive/patch_1Sep2017.tar.gz"
-    git = "https://github.com/lammps/lammps.git"
+    git = "https://github.com/amritagos/lammps.git"
 
     tags = ["ecp", "ecp-apps"]
 
+    version("newR4LJ", branch="newR4LJ")
     version("develop", branch="develop")
     version("20220623", sha256="21533ce6f174c80815a48c99e5f3dd109e69d55c4cad47312d88a7190a35927f")
     version("20220602", sha256="3e8f54453e53b3b387a68317277f832b8cf64a981e64b21e98bb37ea36ac4a60")
